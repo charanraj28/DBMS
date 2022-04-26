@@ -1,0 +1,100 @@
+
+SQL> create table chasis(
+  2  manufacturer varchar2(30) not null,
+  3  length number,
+  4  width number,
+  5  weigth number);
+
+Table created.
+
+ 
+
+SQL> alter table chasis add constraint pk_chasis primary key(manufacturer);
+
+Table altered.
+
+SQL> desc chasis
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MANUFACTURER                              NOT NULL VARCHAR2(30)
+ LENGTH                                             NUMBER
+ WIDTH                                              NUMBER
+ WEIGTH                                             NUMBER
+
+SQL> create table memory(
+  2  manufacturer varchar2(30) not null,
+  3  cap_of_RAM number,
+  4  Mid number,
+  5  cap_of_HardD number);
+
+Table created.
+
+SQL> desc memory
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MANUFACTURER                              NOT NULL VARCHAR2(30)
+ CAP_OF_RAM                                         NUMBER
+ MID                                                NUMBER
+ CAP_OF_HARDD                                       NUMBER
+
+SQL> insert into chasis values('&manufacturer',&length,&width,&weight);
+Enter value for manufacturer: Dell
+Enter value for length: 31.4
+Enter value for width: 53.8
+Enter value for weight: 3.14
+old   1: insert into chasis values('&manufacturer',&length,&width,&weight)
+new   1: insert into chasis values('Dell',31.4,53.8,3.14)
+
+1 row created.
+
+SQL> /
+Enter value for manufacturer: IBM
+Enter value for length: 32.4
+Enter value for width: 55
+Enter value for weight: 4
+old   1: insert into chasis values('&manufacturer',&length,&width,&weight)
+new   1: insert into chasis values('IBM',32.4,55,4)
+
+1 row created.
+
+SQL> select * from chasis;
+
+MANUFACTURER                       LENGTH      WIDTH     WEIGTH                 
+------------------------------ ---------- ---------- ----------                 
+Dell                                 31.4       53.8       3.14                 
+IBM                                  32.4         55          4                 
+
+
+
+SQL> insert into memory values('&manufacturer',&cap_of_RAM,&Mid,&cap_of_HardD);
+Enter value for manufacturer: Dell
+Enter value for cap_of_ram: 4
+Enter value for mid: 91126450
+Enter value for cap_of_hardd: 1
+old   1: insert into memory values('&manufacturer',&cap_of_RAM,&Mid,&cap_of_HardD)
+new   1: insert into memory values('Dell',4,91126450,1)
+
+1 row created.
+
+SQL> /
+Enter value for manufacturer: IBM
+Enter value for cap_of_ram: 16
+Enter value for mid: 32514698
+Enter value for cap_of_hardd: 2
+old   1: insert into memory values('&manufacturer',&cap_of_RAM,&Mid,&cap_of_HardD)
+new   1: insert into memory values('IBM',16,32514698,2)
+
+1 row created.
+
+SQL> select * from memory;
+
+MANUFACTURER                   CAP_OF_RAM        MID CAP_OF_HARDD               
+------------------------------ ---------- ---------- ------------               
+Dell                                    4   91126450            1               
+IBM                                    16   32514698            2               
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off
